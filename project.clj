@@ -62,6 +62,7 @@
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                    :dependencies [
+                                  [ring/ring-devel "1.5.1"]
                                   [ring/ring-mock "0.3.0"]
                                   [weasel "0.7.0"]
                                   [leiningen-core "2.7.1"]
