@@ -5,7 +5,8 @@
             [ring.middleware.resource :refer [wrap-resource]]
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            ))
 
 (defroutes routes
   (resources "/")

@@ -1,8 +1,7 @@
 (ns reagent-phonecat.core
     (:require [reagent.core :as rg]
               [clojure.string :as str]
-              [ajax.core :as ajx])
-    )
+              [ajax.core :as ajx])    )
 
 (enable-console-print!)
 
@@ -46,8 +45,8 @@ Try and call this function from the ClojureScript REPL."
 
 
 (def order-prop-state (rg/cursor state [:order-prop]))
-    
-    
+
+
 (defn update-search [state new-search]
   (assoc state :search new-search))
 
@@ -55,7 +54,7 @@ Try and call this function from the ClojureScript REPL."
 ;; --------------------------------------------
 ;; Server communication
 
-(defn load-phones! "Fetches the list of phones from the server and updates the state atom with it" 
+(defn load-phones! "Fetches the list of phones from the server and updates the state atom with it"
   [state]
   (ajx/GET "/phones/phones.json"
            {:handler (fn [phones] (swap! state assoc :phones phones))
@@ -66,7 +65,7 @@ Try and call this function from the ClojureScript REPL."
 ;; --------------------------------------------
 ;; View components
 
-(declare ;; here we declare our components to define their in an order that feels natural.  
+(declare ;; here we declare our components to define their in an order that feels natural.
   <top-cpnt>
     <search-cpnt>
     <order-prop-select>
@@ -87,9 +86,9 @@ Try and call this function from the ClojureScript REPL."
       ]]))
 
 (defn <search-cpnt> [search]
-  [:span 
+  [:span
    "Search: "
-   [:input {:type "text" 
+   [:input {:type "text"
             :value search
             :on-change (fn [e] (swap! state update-search (-> e .-target .-value)))}]])
 
@@ -103,7 +102,7 @@ Try and call this function from the ClojureScript REPL."
 (defn <phones-list> "An unordered list of phones"
   [phones-list search order-prop]
   [:ul.phones
-   (for [phone (->> phones-list 
+   (for [phone (->> phones-list
                  (filter #(matches-search? search %))
                  (sort-by order-prop))]
      ^{:key (:name phone)} [<phone-item> phone]
@@ -117,9 +116,9 @@ Try and call this function from the ClojureScript REPL."
      [:a {:href phone-page-href} name]
      [:p snippet]]))
 
-(defn mount-root "Creates the application view and injects ('mounts') it into the root element." 
+(defn mount-root "Creates the application view and injects ('mounts') it into the root element."
   []
-  (rg/render 
+  (rg/render
     [<top-cpnt>]
     (.getElementById js/document "app")))
 
