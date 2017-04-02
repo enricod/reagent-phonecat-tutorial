@@ -8,29 +8,31 @@
 
   ;; --------------------------------------------------------------------------------
   ;; Dependencies
-  
+
   :dependencies [;; the Clojure(Script) language
-                 [org.clojure/clojure "1.7.0-RC1"]
-                 [org.clojure/clojurescript "0.0-3308" :scope "provided"]
-                 
+                 [org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojurescript "1.9.494" :scope "provided"]
+
                  ;; Server-side dependencies
-                 [ring-server "0.4.0"]
-                 [ring "1.3.2"]
-                 [ring/ring-defaults "0.1.5"]
-                 [compojure "1.3.4"]
+                 ;; [ring-server "0.4.0"]
+                 [ring "1.5.1"]
+                 [ring/ring-defaults "0.2.3"]
+                 [compojure "1.5.2"]
                  [hiccup "1.0.5"]
-                 [environ "1.0.0"]
-                 [prone "0.8.2"]
-                 
-                 ;; client-side dependencies
-                 [cljsjs/react "0.13.3-0"]
-                 [reagent "0.5.0"]
-                 [cljs-ajax "0.3.14"] 
-                 [bidi "1.20.3"]
+                 [environ "1.1.0"]
+                 [prone "1.1.4"]
+
+                 ;;; client-side dependencies
+                 [cljsjs/react "15.4.2-2"]
+                 [reagent "0.6.1"]
+                 [cljs-ajax "0.5.8"]
+                 [bidi "2.0.16"]
                  ]
 
   ;; --------------------------------------------------------------------------------
-  
+
+  :target-path "target/%s"
+
   :plugins [[lein-environ "1.0.0"]
             [lein-asset-minifier "0.2.2"]]
 
@@ -60,18 +62,21 @@
   :profiles {:dev {:repl-options {:init-ns reagent-phonecat.repl
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
-                   :dependencies [[ring-mock "0.1.5"]
-                                  [ring/ring-devel "1.3.2"]
-                                  [weasel "0.6.0"]
-                                  [leiningen-core "2.5.1"]
-                                  [lein-figwheel "0.3.3"]
+                   :dependencies [
+                                  [ring/ring-devel "1.5.1"]
+                                  [ring/ring-mock "0.3.0"]
+                                  [weasel "0.7.0"]
+                                  [leiningen-core "2.7.1"]
+                                  [lein-figwheel "0.5.9"]
                                   [com.cemerick/piggieback "0.2.1"]
-                                  [org.clojure/tools.nrepl "0.2.10"]
-                                  [pjstadig/humane-test-output "0.7.0"]]
+                                  [org.clojure/tools.nrepl "0.2.12"]
+                                  [pjstadig/humane-test-output "0.8.1"]
+
+                                  ]
 
                    :source-paths ["env/dev/clj"]
-                   :plugins [[lein-figwheel "0.3.3"]
-                             [lein-cljsbuild "1.0.6"]]
+                   :plugins [[lein-figwheel "0.5.9"]
+                             [lein-cljsbuild "1.1.6-SNAPSHOT"]]
 
                    :injections [(require 'pjstadig.humane-test-output)
                                 (pjstadig.humane-test-output/activate!)]

@@ -18,15 +18,15 @@ Try and call this function from the ClojureScript REPL."
 ;; --------------------------------------------
 ;; Application data
 
-(def hardcoded-phones-data [{:name "Nexus S"
-                             :description "Fast just got faster with Nexus S."
-                             :age 1}
-                            {:name "Motorola XOOM™ with Wi-Fi"
-                             :description "The Next, Next Generation tablet."
-                             :age 2}
-                            {:name "MOTOROLA XOOM™"
-                             :description "The Next, Next Generation tablet."
-                             :age 3}])
+;(def hardcoded-phones-data [{:name "Nexus S"
+;                             :description "Fast just got faster with Nexus S."
+;                             :age 1}
+;                            {:name "Motorola XOOM™ with Wi-Fi"
+;                             :description "The Next, Next Generation tablet."
+;                             :age 2}
+;                            {:name "MOTOROLA XOOM™"
+;                             :description "The Next, Next Generation tablet."
+;                             :age 3}])
 
 ;; --------------------------------------------
 ;; Search logic
@@ -92,6 +92,18 @@ Try and call this function from the ClojureScript REPL."
 
 (defn navigate-to! [routes nav]
   (.setToken h (nav-to-url routes nav)))
+
+(comment ;; examples
+  (url-to-nav routes "/phones")
+  => {:page :phones :params nil}
+  (nav-to-url routes {:page :phones})
+  => "/phones"
+
+  (url-to-nav routes "/phones/motorola-xoom")
+  => {:page :phone :params {:phone-id "motorola-xoom"}}
+  (nav-to-url routes {:page :phone :params {:phone-id "motorola-xoom"}})
+  => "/phones/motorola-xoom"
+  )
 
 (defn hook-browser-navigation! "Listen to navigation events and updates the application state accordingly."
   [routes]
